@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from langserve import add_routes
 from rag_chroma import chain as rag_chroma_chain
-
 app = FastAPI()
 
 

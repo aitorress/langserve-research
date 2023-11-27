@@ -5,13 +5,15 @@ from langchain.pydantic_v1 import BaseModel
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnableParallel, RunnablePassthrough
 from langchain.vectorstores import Chroma
+from langchain.document_loaders import UnstructuredMarkdownLoader
 
-# Example for document loading (from url), splitting, and creating vectostore
-
-""" 
 # Load
 from langchain.document_loaders import WebBaseLoader
-loader = WebBaseLoader("https://lilianweng.github.io/posts/2023-06-23-agent/")
+import os
+
+print("Current Working Directory:", os.getcwd())
+
+loader = UnstructuredMarkdownLoader("fas_info.md")
 data = loader.load()
 
 # Split
@@ -21,18 +23,9 @@ all_splits = text_splitter.split_documents(data)
 
 # Add to vectorDB
 vectorstore = Chroma.from_documents(documents=all_splits, 
-                                    collection_name="rag-chroma",
+                                    collection_name="rag-chroma-fas",
                                     embedding=OpenAIEmbeddings(),
                                     )
-retriever = vectorstore.as_retriever()
-"""
-
-# Embed a single document as a test
-vectorstore = Chroma.from_texts(
-    ["harrison worked at kensho and is friends with Andres"],
-    collection_name="rag-chroma",
-    embedding=OpenAIEmbeddings(),
-)
 retriever = vectorstore.as_retriever()
 
 # RAG prompt
@@ -53,7 +46,6 @@ chain = (
     | model
     | StrOutputParser()
 )
-
 
 # Add typing for input
 class Question(BaseModel):
