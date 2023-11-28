@@ -9,9 +9,9 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.9"
 uvicorn = "^0.23.2"
-langserve = {extras = ["server"], version = ">=0.0.34"}
+langserve = {extras = ["server"], version = ">=0.0.32"}
 pydantic = "<2"
 rag-chroma = {path = "packages/rag-chroma", develop = true}
 unstructured = "^0.11.0"
