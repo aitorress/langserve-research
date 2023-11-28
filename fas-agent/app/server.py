@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from langserve import add_routes
-from rag_chroma import chain as rag_chroma_chain
+from rag_chroma import chain
+
 app = FastAPI()
 
 
@@ -9,7 +10,7 @@ app = FastAPI()
 async def redirect_root_to_docs():
     return RedirectResponse("/docs")
 
-add_routes(app, rag_chroma_chain, path="/rag-chroma")
+add_routes(app, chain, path="/rag-chroma", enable_feedback_endpoint=True)
 
 if __name__ == "__main__":
     import uvicorn
