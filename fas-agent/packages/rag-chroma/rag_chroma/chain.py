@@ -6,8 +6,16 @@ from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnableParallel, RunnablePassthrough
 from langchain.vectorstores import Chroma
 from langchain.document_loaders import UnstructuredMarkdownLoader
+import os
 
-loader = UnstructuredMarkdownLoader("fas_info.md")
+# Get the directory of the current script (__file__ is the path to the current script)
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the path to the fas_info.md file
+# Assuming fas_info.md is in the root directory of the project
+fas_info_path = os.path.join(script_dir, 'fas_info.md')
+
+loader = UnstructuredMarkdownLoader(fas_info_path)
 data = loader.load()
 
 # Split

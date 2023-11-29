@@ -15,6 +15,7 @@ langserve = {extras = ["server"], version = ">=0.0.32"}
 pydantic = "<2"
 rag-chroma = {path = "packages/rag-chroma", develop = true}
 unstructured = "^0.11.0"
+markdown = "^3.5.1"
 
 
 [tool.poetry.group.dev.dependencies]
